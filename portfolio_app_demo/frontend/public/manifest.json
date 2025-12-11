@@ -1,0 +1,15 @@
+{
+  "short_name": "TumAI",
+  "name": "Tum Portfolio AI (Demo)",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1F73B7",
+  "background_color": "#ffffff"
+}

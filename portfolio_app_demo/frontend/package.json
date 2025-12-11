@@ -1,0 +1,14 @@
+{
+  "name": "tum-portfolio-frontend-demo",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "serve -s build",
+    "dev": "react-scripts start"
+  }
+}
