@@ -1,10 +1,18 @@
+self.addEventListener('push', function (event) {
+  const data = event.data ? event.data.json() : {};
 
-self.addEventListener('push', function(event) {
-  const data = event.data ? event.data.json() : {title:'Tum', body:'Push received'};
+  const title = data.title || "New Notification";
   const options = {
-    body: data.body,
-    icon: '/icon-192.png',
-    badge: '/icon-192.png'
+    body: data.body || "You have a new message.",
+    icon: "/icon.png",
   };
-  event.waitUntil(self.registration.showNotification(data.title, options));
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function (event) {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('/')
+  );
 });
