@@ -1,12 +1,11 @@
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then((reg) => {
-        console.log('Service worker registered.', reg);
-      })
-      .catch((err) => {
-        console.error('Service worker registration failed:', err);
-      });
-  });
-}
+// src/index.jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { registerServiceWorker } from './register-sw';
+import './styles.css';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+// register SW (non-blocking)
+registerServiceWorker();
