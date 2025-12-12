@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './styles.css';
+import './register-service-worker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
