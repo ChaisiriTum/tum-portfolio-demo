@@ -1,10 +1,9 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App"; // หรือ path ที่แท้จริง
+import "./styles.css";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Dashboard from './components/Dashboard';
-import './styles.css';
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);
 
-function App(){
-  return <div className="app"><Dashboard/></div>;
-}
-ReactDOM.render(<App />, document.getElementById('root'));
