@@ -1,29 +1,30 @@
-import React from "react";
-import * as XLSX from "xlsx";
+// src/components/UploadExcel.jsx
+import React from 'react';
+import * as XLSX from 'xlsx';
 
-function UploadExcel() {
-  const handleFile = (e) => {
+export default function UploadExcel() {
+  const handleFile = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      const data = new Uint8Array(evt.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
+    try {
+      const data = await file.arrayBuffer();
+      const workbook = XLSX.read(data);
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
-      const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-      console.log("excel json", json);
-      // TODO: แปลง json ให้เข้ากับ template และส่งไป backend
-    };
-    reader.readAsArrayBuffer(file);
+      const json = XLSX.utils.sheet_to_json(sheet, { defval: null });
+      console.log('Excel parsed:', json);
+      alert(`อ่านไฟล์เสร็จ! rows: ${json.length}. ดู console.log เพื่อข้อมูลตัวอย่าง`);
+      // TODO: ส่ง json ไป backend หรือแสดงบน UI
+    } catch (err) {
+      console.error('Error parsing excel', err);
+      alert('อ่านไฟล์ไม่สำเร็จ ดู console.log');
+    }
   };
 
   return (
-    <div className="card">
+    <div className="card" style={{ padding: 16, background: '#fff', borderRadius: 8 }}>
       <h3>Upload แผน Excel (เวอร์ชันพรีเมียม)</h3>
       <input type="file" accept=".xlsx,.xls" onChange={handleFile} />
     </div>
   );
 }
-
-export default UploadExcel;
