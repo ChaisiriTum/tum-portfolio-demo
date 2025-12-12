@@ -1,4 +1,3 @@
-// src/index.jsx (ตัวอย่าง)
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -6,7 +5,7 @@ import './styles.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// inline SW register (ถ้าไม่อยากเพิ่มไฟล์)
+// register service worker (from public/service-worker.js)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
