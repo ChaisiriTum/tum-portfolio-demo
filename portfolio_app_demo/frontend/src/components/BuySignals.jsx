@@ -1,23 +1,32 @@
-
 import React from 'react';
+import { API_URL } from '../config';
 
-export default function BuySignals({onCheck}){
-  const check = async ()=>{
-    // demo: call backend alerts endpoint with sample assets
-    const payload = { assets: [
-      { symbol: 'QQQ', highest: 450, currentPrice: 380, triggerPercent: -10, highestPrice:450 },
-      { symbol: 'SOXX', highest: 600, currentPrice: 480, triggerPercent: -15, highestPrice:600 }
-    ]};
-    const res = await fetch('http://localhost:4000/api/alerts', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-    const data = await res.json();
-    alert('Signals checked (demo). See console.');
-    console.log(data);
-    onCheck(data.signals || []);
+export default function BuySignals({ onCheck }) {
+
+  const check = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/alerts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const data = await res.json();
+      alert('เช็คสัญญาณจาก backend (demo) ดู Console');
+
+      console.log('[BuySignals Demo]', data);
+
+      onCheck(data.signals || []);
+
+    } catch (err) {
+      console.error('Fetch error:', err);
+      onCheck([]);
+    }
   };
+
   return (
     <div className="card">
       <h3>Buy Signals (Demo)</h3>
-      <p className="small">กดปุ่มเพื่อตรวจสอบสัญญาณจาก backend (demo)</p>
+      <p>กดปุ่มเพื่อดึงสัญญาณซื้อจาก backend (demo)</p>
       <button className="btn" onClick={check}>ตรวจสอบสัญญาณ</button>
     </div>
   );
